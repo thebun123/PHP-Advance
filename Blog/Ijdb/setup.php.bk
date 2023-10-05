@@ -1,0 +1,6 @@
+<?php
+
+$initialQuery = "CREATE TABLE `author1` (`id` int(11) NOT NULL AUTO_INCREMENT,`name` varchar(50) DEFAULT NULL,`email` varchar(100) DEFAULT NULL,`password` varchar(255) DEFAULT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;CREATE TABLE `blog1` (`id` int(11) NOT NULL AUTO_INCREMENT,`title` varchar(255) DEFAULT NULL,`description` text NOT NULL,`image` varchar(255) DEFAULT NULL,`status` int(1) NOT NULL,`created` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',`updated` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',PRIMARY KEY (`id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;";
+$pdo = new \PDO('mysql:host=mysql;dbname=my_blog;charset=utf8mb4', 'root', '123456Aa');
+$pdo->prepare($initialQuery)->execute();
+

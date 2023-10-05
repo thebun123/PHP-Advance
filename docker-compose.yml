@@ -1,0 +1,41 @@
+version: '3'
+services:
+  web:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/nginx.conf
+      - ./Blog:/Blog
+
+  php:
+    build:
+      context: .
+      dockerfile: PHP.Dockerfile
+    volumes:
+      - ./Blog:/Blog
+    environment:
+      PHP_IDE_CONFIG: "serverName=docker-server"
+
+  mysql:
+    image: mariadb:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: '123456Aa'
+      MYSQL_USER: 'web'
+      MYSQL_PASSWORD: '123456Aa'
+      MYSQL_DATABASE: 'my_blog'
+    volumes:
+      - blog_data:/var/lib/mysql
+    ports:
+      - 3306:3306
+
+  adminer_blog:
+    image: dockette/adminer
+    restart: always
+    ports:
+      - 8181:80
+    environment:
+      MEMORY: 4096M
+      UPLOAD: 4096M
+volumes:
+  blog_data: {}
